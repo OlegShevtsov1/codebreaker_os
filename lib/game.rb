@@ -21,7 +21,7 @@ class Game
 
   def run
     @secret_code = generate_code
-
+    print @secret_code
     @secret_code_for_hint = @secret_code.clone
   end
 
