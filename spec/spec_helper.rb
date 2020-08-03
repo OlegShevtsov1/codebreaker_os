@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'simplecov'
-puts 'required simplecov'
 SimpleCov.start do
   minimum_coverage 0
   enable_coverage :branch
@@ -10,7 +9,7 @@ end
 
 require 'pry'
 
-require_relative '../lib/codebreaker_os.rb'
+require_relative '../lib/codebreaker_os'
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|

@@ -1,2 +1,2 @@
-spec/statistic.yml
-codebreaker_os-0.0.1.gem
+statistic.yml
+*.gem
