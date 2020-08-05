@@ -1,54 +1,22 @@
 # frozen_string_literal: true
 
-class Statistic
-  include Uploader
-  class << self
-    def generate_stats
-      {
-        name: player_name,
-        difficulty: difficulty_name,
-        total_attempts: total_attempts,
-        used_attempts: used_attempts,
-        total_hints: total_hints,
-        used_hints: used_hints,
-        date: Time.now
-      }
-    end
+module CodebreakerOs
+  class Statistic
+    class << self
+      def sorted_winners(winners)
+        winners.sort_by do |winner|
+          [winner.difficulty[:attempts], winner.difficulty[:hints],
+           winner.attempts_used, winner.hints_used]
+        end
+      end
 
-    def sort_stats
-      stats.sort_by { |player| [player[:total_attempts], player[:used_attempts], player[:used_hints]] }
-    end
-
-    def stats
-      Uploader.get || []
-    end
-
-    def total_attempts
-      DIFFICULTIES[game.difficulty_name.to_sym][:attempts]
-    end
-
-    def used_attempts
-      DIFFICULTIES[game.difficulty_name.to_sym][:attempts] - game.attempts
-    end
-
-    def total_hints
-      DIFFICULTIES[game.difficulty_name.to_sym][:hints]
-    end
-
-    def used_hints
-      DIFFICULTIES[game.difficulty_name.to_sym][:hints] - game.hints
-    end
-
-    def difficulty_name
-      game.difficulty_name
-    end
-
-    def player_name
-      game.player_name
-    end
-
-    def game
-      CurrentGame.game
+      def decorated_top_players(game_plays)
+        game_plays.map.with_index do |game, index|
+          { rating: index + 1, name: game.player.name, difficulty: game.difficulty[:name],
+            attempts_total: game.attempts_total, attempts_used: game.attempts_used,
+            hints_total: game.hints_total, hints_used: game.hints_used }
+        end
+      end
     end
   end
 end

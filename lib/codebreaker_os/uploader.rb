@@ -1,16 +1,19 @@
 # frozen_string_literal: true
 
-require 'yaml'
-module Uploader
-  STORE = 'statistic.yml'
-  def self.add(element)
-    File.open(STORE, 'w') do |file|
-      file.write(element.to_yaml)
-    end
-  end
+module CodebreakerOs
+  class Uploader
+    attr_reader :storage_file
 
-  def self.get
-    add([]) unless File.file?(STORE)
-    YAML.load_file(STORE)
+    def initialize(storage_file = 'statistics.yml')
+      @storage_file = storage_file
+    end
+
+    def new_store
+      YAML::Store.new(storage_file)
+    end
+
+    def storage_exists?
+      File.exist? storage_file
+    end
   end
 end

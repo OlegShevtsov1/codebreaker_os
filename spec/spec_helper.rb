@@ -1,24 +1,29 @@
 # frozen_string_literal: true
 
+GUESS_PLACE = '+'
+GUESS_PRESENCE = '-'
+
 require 'simplecov'
+
 SimpleCov.start do
-  minimum_coverage 0
   enable_coverage :branch
   add_filter 'spec/'
+  minimum_coverage 95
 end
 
-require 'pry'
-
-require_relative '../lib/codebreaker_os'
+require 'codebreaker_os'
 
 RSpec.configure do |config|
-  config.expect_with :rspec do |expectations|
-    expectations.include_chain_clauses_in_custom_matcher_descriptions = true
-  end
+  DIFFICULTY_LEVELS = { easy: :easy, medium: :medium, hell: :hell }.freeze
 
-  config.mock_with :rspec do |mocks|
-    mocks.verify_partial_doubles = true
-  end
+  config.example_status_persistence_file_path = '.rspec_status'
+  config.disable_monkey_patching!
 
-  config.shared_context_metadata_behavior = :apply_to_host_groups
+  config.expect_with :rspec do |c|
+    c.syntax = :expect
+  end
+end
+
+def random_number(length, range)
+  Array.new(length) { rand(range) }.join
 end
