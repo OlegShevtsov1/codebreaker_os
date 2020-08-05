@@ -14,9 +14,9 @@ module CodebreakerOs
       errors.empty?
     end
 
-    def self.decorate(value, strict_match = '+', soft_match = '-')
-      value.gsub(CodebreakerOs::Game::EXACT_MATCH_SIGN, strict_match)
-           .gsub(CodebreakerOs::Game::NOT_EXACT_MATCH_SIGN, soft_match)
+    def self.decorate(value)
+      value.gsub(CodebreakerOs::Game::EXACT_MATCH_SIGN, '+')
+           .gsub(CodebreakerOs::Game::NOT_EXACT_MATCH_SIGN, '-')
     end
 
     private
