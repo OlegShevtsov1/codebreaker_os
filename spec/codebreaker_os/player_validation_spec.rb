@@ -4,7 +4,7 @@ RSpec.describe CodebreakerOs::Player do
   context 'with name validation' do
     let(:above_max_length_name) { 'f' * (described_class::NAME_LENGTH_RANGE.max + 1) }
     let(:below_min_length_name) { 'f' * (described_class::NAME_LENGTH_RANGE.min - 1) }
-    let(:non_string_names) { ['111@', 1111, '#@#$'] }
+    let(:non_string_names) { %w[111@ #@#$] }
     let(:empty_name) { '' }
 
     it 'name should be string' do

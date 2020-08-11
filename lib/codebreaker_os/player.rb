@@ -31,7 +31,7 @@ module CodebreakerOs
     end
 
     def validate_string
-      errors << I18n.t(:'errors.player.non_string_name') unless !!(name =~ /\A[a-zA-Z_0-9]+\z/)
+      errors << I18n.t(:'errors.player.non_string_name') if name.match?(/[^a-zA-Z_0-9]/)
     end
 
     def validate_min_length

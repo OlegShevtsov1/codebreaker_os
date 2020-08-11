@@ -13,7 +13,6 @@ module CodebreakerOs
       @player = player
       @difficulty = difficulty.level
       @secret_number = code_maker
-      puts @secret_number
       assign_hints
       @hints_used = 0
       @attempts_used = 0
