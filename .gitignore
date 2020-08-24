@@ -1,0 +1,20 @@
+/.bundle/
+/.yardoc
+/_yardoc/
+/coverage/
+/doc/
+/pkg/
+/spec/reports/
+/tmp/
+.idea/
+
+# rspec failure tracking
+.rspec_status
+
+.ruby-gemset
+
+.rakeTasks
+
+.travis.yml
+
+*.gem
